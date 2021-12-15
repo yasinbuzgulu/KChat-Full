@@ -1,0 +1,23 @@
+<div class="application-component">
+  <div class="application-container">
+    <ng-container *ngIf="!user">
+      <div class="userForm">
+        <h1 class="marginBottom15">
+          Welcome to the chat
+        </h1>
+        <div class="marginBottom15">
+          What is your name ?
+        </div>
+        <form (submit)="activateUser()">
+          <input #userInput [formControl]="userName" class="marginBottom15-userNameInput" type="text" placeholder="What is your name?">
+          <button *ngIf="userName.value" type="submit" class="application-component-userNameButton">
+            Let's go!
+          </button>
+        </form>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="user">
+      <app-messages class="app-messages-container" [user]="user"></app-messages>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<hr >
+<div class="message-component">
+  <div #scroll [scrollTop]="scroll.scrollHeight" class="message-container">
+
+    <div class="messages">
+      <div *ngFor="let message of messages"
+           [ngClass]="{'current-user': isCurrentUser(message.userId), 'other-user': !isCurrentUser(message.userId)}">
+        <div class="bubble" >
+<!--          Login : {{loginDate | date : 'hh:mm:ss'}}-->
+<!--          Logout : {{logoutDate | date : 'hh:mm:ss'}}-->
+<!--          Message : {{message.date | date : 'hh:mm:ss'}}-->
+<!--          {{loginDate.getTime() +"  "+ message.date.getTime() +" " + logoutDate.getTime()}} -->
+          <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
+            {{message.userName}}
+          </div>
+          <div *ngIf="isCurrentUser(message.userId)" class="user-name">
+            Me ( {{user.name}} )
+          </div>
+          <div class="message-text" >
+            <span class="margin-right-10">{{message.text}}</span>
+            <span *ngIf="isToday(message.date)" class="message-date">
+              {{message.date | date:'hh:mm'}}
+            </span>
+          </div>
+          <div *ngIf="!isToday(message.date)" class="message-date" >
+            {{message.date | date:'hh:mm dd MMM yyyy'}}
+          </div>
+        </div>
+      </div>
+      <div [hidden]="switch === false"> {{count}} New Messages </div>
+
+    </div>
+  </div>
+  <hr>
+  <form (submit)="send()" class="message-form">
+    <input #messageInput   [formControl]="name" placeholder="Write your message..." type="text">
+    <div class="send-button">
+      <button [hidden]="name.value === ''" [disabled]="name.value === ''" type="submit" class="message-component-button">
+        Send <img class="send-message-button-image" src="assets/paper-plane.png" alt="">
+      </button>
+    </div>
+  </form>
+</div>
