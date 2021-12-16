@@ -2,8 +2,11 @@ package com.chatApp.chatapi.service;
 
 import com.chatApp.chatapi.model.User;
 import com.chatApp.chatapi.repository.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -11,6 +14,9 @@ import java.util.List;
  */
 @Service
 public class UserManager {
+
+    @Autowired
+    UserManager userManager;
 
     private UserRepository userRepository;
 
@@ -32,6 +38,7 @@ public class UserManager {
     public User findOrCreateUser(String userName) {
         User existingUser = userRepository.findByName(userName);
         if (existingUser != null) {
+            existingUser.setLoginTime(Date.from(Instant.now()).getTime());
             return existingUser;
         } else {
             return userRepository.save(userName);

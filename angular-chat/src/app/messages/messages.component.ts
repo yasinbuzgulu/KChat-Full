@@ -3,7 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
+  Input, OnChanges,
   OnDestroy,
   OnInit,
   ViewChild
@@ -36,7 +36,6 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   messageInput: ElementRef;
 
   messages: Message[] = [];
-  inputUser: User[];
   name = new FormControl('');
   ws: any;
   scrollTop = 200;
@@ -44,14 +43,15 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   logoutDate: Date;
   count ;
   switch = true;
+  isOnline = false;
 
   ngOnInit(): void {
     this.switch = true;
-    this._findUser();
+    // this._findUser();
     this.connect();
     this._getMessages();
     this._setScrollToBottom();
-    window.addEventListener('beforeunload', function (e) {
+    window.addEventListener('beforeunload', function(e) {
       const confirmationMessage = '\o/';
       e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
       return confirmationMessage;              // Gecko, WebKit, Chrome <34
@@ -59,6 +59,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     this.loginDate = new Date(this.user.loginTime);
     this.logoutDate = new Date(this.user.exitTime);
     // this._unreadMessagesCount();
+
   }
 
   ngAfterViewInit(): void {
@@ -77,12 +78,13 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   private _unreadMessagesCount() {
-    this.count = this.messages.filter(time => (this.logoutDate < time.date)).filter(tim => tim.date < this.loginDate).length;
+    if (!this.isOnline ){
+    this.count = this.messages.filter(time => ( this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
   }
+  }
+
   private _findUser() {
-    this.userService.getAllUsers().then((user: User[]) => {
-      this.inputUser = user.filter(person => person.id === this.user.id);
-    });
+    this.userService.getUser(this.user.name).then(user => this.user = user);
   }
 
 
@@ -93,7 +95,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
       this.ws.subscribe('/chat', (frame: { body: string }) => {
         const message: Message = JSON.parse(frame.body);
         this.messages.push({...message, date: new Date(message.date)});
-      });
+      } );
     }, (error) => {
       alert('STOMP error ' + error);
     });
@@ -114,6 +116,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   send() {
+    this._findUser();
     this.switch = false;
     this._setScrollToBottom();
     this.messageService.send({
@@ -131,12 +134,12 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   isCurrentUser(userId: string) {
+    this.isOnline = true;
     return userId === this.user.id;
   }
 
   onActivate(event) {
     window.scroll(0, 0);
-
   }
 
   ngAfterViewChecked(): void {

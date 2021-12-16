@@ -66,15 +66,15 @@ public class UserController {
 
     Set<String> mySet = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
 
-    @EventListener
-    public void onSessionConnectedEvent(SessionConnectedEvent event) {
-        StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
-        mySet.add(sha.getSessionId());  // System.out.println(sha.getSessionId());
-        System.out.println(mySet.size());
-        System.out.println("Bir kullanıcı giriş yaptı");
-        System.out.println("Giriş yapma zamanı : "+event.getTimestamp());
-        setLoginTime(event.getTimestamp());
-    }
+//    @EventListener
+//    public void onSessionConnectedEvent(SessionConnectedEvent event) {
+//        StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
+//        mySet.add(sha.getSessionId());  // System.out.println(sha.getSessionId());
+//        System.out.println(mySet.size());
+//        System.out.println("Bir kullanıcı giriş yaptı");
+//        System.out.println("Giriş yapma zamanı : "+event.getTimestamp());
+//        setLoginTime(event.getTimestamp());
+//    }
 
     @EventListener
     public void onSessionDisconnectEvent(SessionDisconnectEvent event) {
@@ -82,20 +82,18 @@ public class UserController {
         mySet.remove(sha.getSessionId());  // System.out.println(sha.getSessionId());
         System.out.println(mySet.size());
         System.out.println("Bir kullanıcı çıkış yaptı");
-        System.out.println("Çıkış yapma zamanı : "+event.getTimestamp());
-        setExitTime(event.getTimestamp());
-//        Date.from(Instant.now()).getTime()
+        System.out.println("Çıkış yapma zamanı : " + event.getTimestamp());
+        setExitTime(event.getTimestamp());  // Date.from(Instant.now()).getTime()
     }
+
     private void setLoginTime(Long loginTime) {
-        User temporaryUser = new User();
-        temporaryUser = userManager.getUserByName(name);
+        User temporaryUser = userManager.getUserByName(name);
         temporaryUser.setLoginTime(loginTime);
         userManager.updateUser(temporaryUser, name);
     }
 
     private void setExitTime(Long exitTime) {
-        User temporaryUser = new User();
-        temporaryUser =userManager.getUserByName(name);
+        User temporaryUser = userManager.getUserByName(name);
         temporaryUser.setExitTime(exitTime);
         userManager.updateUser(temporaryUser, name);
     }

@@ -3,6 +3,8 @@ package com.chatApp.chatapi.repository.user;
 import com.chatApp.chatapi.model.User;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -52,6 +54,7 @@ public class MongoUserRepository implements UserRepository {
 
     @Override
     public User saveObject(User user) {
+        user.setLoginTime(Date.from(Instant.now()).getTime());
         return defaultMongoUserRepository.save(user);
     }
 
