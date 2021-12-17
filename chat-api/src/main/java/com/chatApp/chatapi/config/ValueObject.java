@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * Apache kullanımında ıbject equality için gerekli reflectionlar
+ * Apache kullanımında object equality için gerekli reflectionlar
  * <p>
  * //______ !!!!!!!!! _______//
  * *** !! Eğer ana snıf(entity) birçok property içeriyorsa performans problemine yol açabilir, Bu durumda aşağıdaki kodlar kullanılabilir.

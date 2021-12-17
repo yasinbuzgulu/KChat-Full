@@ -16,8 +16,8 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 @Repository
 public class MongoMessageRepository implements MessageRepository {
 
-    private DefaultMongoMessageRepository defaultMongoMessageRepository;
-    private MongoOperations mongoOperations;
+    private final DefaultMongoMessageRepository defaultMongoMessageRepository;
+    private final MongoOperations mongoOperations;
 
     public MongoMessageRepository(
             DefaultMongoMessageRepository defaultMongoMessageRepository,

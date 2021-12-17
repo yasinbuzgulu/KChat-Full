@@ -1,7 +1,8 @@
 package com.chatApp.chatapi.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Kullanıcı nesnesinin bütün halinin sınıfı -kullanıcı içinde kullanılan ve tutulan veriler bütünü-
@@ -18,9 +19,17 @@ public class User implements Serializable {
      */
     private String name;
 
+    /**
+     * Sisteme en son giriş yapma vakti
+     */
     private Long loginTime;
 
+    /**
+     * Sistemden en son çıkış yaptığı vakit
+     */
     private Long exitTime;
+
+    private String connectionId;
 
     public User() {
     }
@@ -35,6 +44,14 @@ public class User implements Serializable {
         this.name = name;
         this.loginTime = loginTime;
         this.exitTime = exitTime;
+    }
+
+    public User(String id, String name, Long loginTime, Long exitTime, String connectionId) {
+        this.id = id;
+        this.name = name;
+        this.loginTime = loginTime;
+        this.exitTime = exitTime;
+        this.connectionId = connectionId;
     }
 
     public void setId(String id) {
@@ -67,5 +84,13 @@ public class User implements Serializable {
 
     public String getId() {
         return id;
+    }
+
+    public String getConnectionId() {
+        return connectionId;
+    }
+
+    public void setConnectionId(String connectionId) {
+        this.connectionId = connectionId;
     }
 }

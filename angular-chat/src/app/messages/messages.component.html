@@ -5,11 +5,7 @@
     <div class="messages">
       <div *ngFor="let message of messages"
            [ngClass]="{'current-user': isCurrentUser(message.userId), 'other-user': !isCurrentUser(message.userId)}">
-        <div class="bubble" [ngStyle]="{'background-color': (isOnline === true &&
-         user.exitTime < message.date.getTime())? 'white' : 'aqua'}" >
-<!--          Login : {{loginDate | date : 'hh:mm:ss' }}-->
-<!--          Logout : {{logoutDate | date : 'hh:mm:ss'}}-->
-<!--          Message : {{message.date | date : 'hh:mm:ss'}}-->
+        <div class="bubble" [ngStyle]="{'background-color': (user.exitTime < message.date.getTime())? 'white' : 'aqua'}" >
           <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
             {{message.userName}}
           </div>
@@ -27,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div [hidden]="switch === false"> {{count}} New Messages </div>
+      <div [hidden]="switch === false"> {{count}} New Messages ___* </div>
 
     </div>
   </div>

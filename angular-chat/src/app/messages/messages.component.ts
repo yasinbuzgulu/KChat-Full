@@ -37,7 +37,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
 
   messages: Message[] = [];
   name = new FormControl('');
-  ws: any;
+  websocket: any;
   scrollTop = 200;
   loginDate: Date;
   logoutDate: Date;
@@ -47,7 +47,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
 
   ngOnInit(): void {
     this.switch = true;
-    // this._findUser();
+    this.detectUserStatus();
     this.connect();
     this._getMessages();
     this._setScrollToBottom();
@@ -58,7 +58,6 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     });
     this.loginDate = new Date(this.user.loginTime);
     this.logoutDate = new Date(this.user.exitTime);
-    // this._unreadMessagesCount();
 
   }
 
@@ -70,6 +69,9 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     this.disconnect();
   }
 
+  detectUserStatus() {
+    this.isOnline = this.user.loginTime > this.user.exitTime;
+  }
   private _getMessages() {
     this.messageService.getMessages().then((messages: Message[]) => {
       this.messages = messages;
@@ -78,9 +80,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   private _unreadMessagesCount() {
-    if (!this.isOnline ){
     this.count = this.messages.filter(time => ( this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
-  }
   }
 
   private _findUser() {
@@ -90,9 +90,9 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
 
   connect() {
     const socket = new WebSocket(environment.webSocket);
-    this.ws = Stomp.over(socket);
-    this.ws.connect({}, () => {
-      this.ws.subscribe('/chat', (frame: { body: string }) => {
+    this.websocket = Stomp.over(socket);
+    this.websocket.connect({}, () => {
+      this.websocket.subscribe('/chat', (frame: { body: string }) => {
         const message: Message = JSON.parse(frame.body);
         this.messages.push({...message, date: new Date(message.date)});
       } );
@@ -102,8 +102,8 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   disconnect() {
-    if (this.ws != null) {
-      this.ws.ws.close();
+    if (this.websocket != null) {
+      this.websocket.websocket.close();
     }
     console.warn('Disconnected');
   }
@@ -116,7 +116,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   send() {
-    this._findUser();
+    this.count = 0;
     this.switch = false;
     this._setScrollToBottom();
     this.messageService.send({

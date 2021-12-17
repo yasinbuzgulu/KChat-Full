@@ -14,4 +14,6 @@ public interface DefaultMongoUserRepository extends MongoRepository<User, String
     User findByName(String name);
 
     Optional<User> findById(String id);
+
+    User findUserByConnectionId(String connectionId);
 }

@@ -30,6 +30,11 @@ public class MongoUserRepository implements UserRepository {
         return defaultMongoUserRepository.findByName(userName);
     }
 
+    @Override
+    public User findByConnectionId(String connectionId) {
+        return defaultMongoUserRepository.findUserByConnectionId(connectionId);
+    }
+
     /**
      * Id ye bağlı kullanıcı bulma metodu
      *
@@ -49,7 +54,7 @@ public class MongoUserRepository implements UserRepository {
      */
     @Override
     public User save(String userName) {
-        return defaultMongoUserRepository.save(new User(null, userName));
+        return defaultMongoUserRepository.save(new User(null, userName, Date.from(Instant.now()).getTime() ,0L));
     }
 
     @Override

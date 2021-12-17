@@ -66,34 +66,36 @@ public class UserController {
 
     Set<String> mySet = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
 
-//    @EventListener
-//    public void onSessionConnectedEvent(SessionConnectedEvent event) {
-//        StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
-//        mySet.add(sha.getSessionId());  // System.out.println(sha.getSessionId());
-//        System.out.println(mySet.size());
-//        System.out.println("Bir kullanıcı giriş yaptı");
-//        System.out.println("Giriş yapma zamanı : "+event.getTimestamp());
-//        setLoginTime(event.getTimestamp());
-//    }
+    @EventListener
+    public void onSessionConnectedEvent(SessionConnectedEvent event) {
+        StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
+        mySet.add(sha.getSessionId());  // System.out.println(sha.getSessionId());
+        System.out.println(mySet.size());
+        System.out.println("Bir kullanıcı giriş yaptı");
+        System.out.println("Giriş yapma zamanı : "+event.getTimestamp());
+        System.out.println(sha.getSessionId());
+        setConnectionId(sha.getSessionId());
+        }
 
     @EventListener
     public void onSessionDisconnectEvent(SessionDisconnectEvent event) {
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(event.getMessage());
         mySet.remove(sha.getSessionId());  // System.out.println(sha.getSessionId());
         System.out.println(mySet.size());
-        System.out.println("Bir kullanıcı çıkış yaptı");
+        System.out.println("Bir kullanıcı çıkış yaptı ");
         System.out.println("Çıkış yapma zamanı : " + event.getTimestamp());
-        setExitTime(event.getTimestamp());  // Date.from(Instant.now()).getTime()
+        System.out.println(sha.getSessionId());
+        setExitTime(Date.from(Instant.now()).getTime(), sha.getSessionId());  // Date.from(Instant.now()).getTime()
     }
 
-    private void setLoginTime(Long loginTime) {
+    private void setConnectionId(String connectionId) {
         User temporaryUser = userManager.getUserByName(name);
-        temporaryUser.setLoginTime(loginTime);
+        temporaryUser.setConnectionId(connectionId);
         userManager.updateUser(temporaryUser, name);
     }
 
-    private void setExitTime(Long exitTime) {
-        User temporaryUser = userManager.getUserByName(name);
+    private void setExitTime(Long exitTime, String connectionId) {
+        User temporaryUser = userManager.getUserByConnectionId(connectionId);
         temporaryUser.setExitTime(exitTime);
         userManager.updateUser(temporaryUser, name);
     }
