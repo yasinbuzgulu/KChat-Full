@@ -3,7 +3,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input, OnChanges,
+  Input,
   OnDestroy,
   OnInit,
   ViewChild
@@ -15,6 +15,8 @@ import {Message} from '../model/message.interface';
 import {User} from '../model/user.interface';
 import {environment} from '../../environments/environment';
 import {UserService} from '../service/user.service';
+import {MatDialog} from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-messages',
@@ -24,7 +26,8 @@ import {UserService} from '../service/user.service';
 export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
 
   constructor(private messageService: MessageService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialog: MatDialog) {
   }
 
   @Input()
@@ -72,6 +75,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   detectUserStatus() {
     this.isOnline = this.user.loginTime > this.user.exitTime;
   }
+
   private _getMessages() {
     this.messageService.getMessages().then((messages: Message[]) => {
       this.messages = messages;
@@ -81,12 +85,14 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
 
   private _unreadMessagesCount() {
     this.count = this.messages.filter(time => ( this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
+    Swal.fire({
+      title: 'You have '+ this.count + ' new messages.',
+      width: 600,
+      padding: '3em',
+      color: '#0B86C3',
+      backdrop: `rgba(1, 1, 1, 0.8)`,
+    })
   }
-
-  private _findUser() {
-    this.userService.getUser(this.user.name).then(user => this.user = user);
-  }
-
 
   connect() {
     const socket = new WebSocket(environment.webSocket);
@@ -145,4 +151,5 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   ngAfterViewChecked(): void {
     this._setScrollToBottom();
   }
+
 }

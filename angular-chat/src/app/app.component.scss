@@ -1,188 +1,250 @@
-.application-component {
+//.application-component {
+//  width: 100%;
+//  height: 100%;
+//  min-width: 100%;
+//  min-height: 100%;
+//  display: flex;
+//  flex-direction: row;
+//  justify-content: center;
+//  align-items: center;
+//  align-content: center;
+//  padding-top: 0;
+//  background-image: url('https://image.freepik.com/free-photo/woman-using-her-mobile-phone-city-skyline-night-light-background_1391-82.jpg');
+//  -webkit-background-size: cover !important;
+//  -moz-background-size: cover;
+//  background-size: cover;
+//
+//  &::before {
+//    content: '';
+//    width: 100%;
+//    height: 50%;
+//    position: absolute;
+//    background-color: #12ec1c;
+//    top: 0;
+//    z-index: -1;
+//  }
+//
+//  .application-container {
+//    display: flex;
+//    flex-direction: row;
+//    justify-content: center;
+//    align-items: center;
+//    align-content: center;
+//    //border-radius: 4px;
+//    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+//    background-color: #ffffff;
+//    font-size: 24px;
+//    padding-bottom: 20px;
+//    overflow-y: hidden;
+//    overflow-x: hidden;
+//    border-bottom-color: #44d90b;
+//    border-radius: 15px;
+//    padding-top: 0;
+//    height: 70%;
+//    width: auto;
+//
+//    @media (max-width: 1200px) {
+//
+//      height: auto;
+//      width: auto;
+//      padding-top: 0;
+//      padding-bottom: 0;
+//
+//    }
+//
+//    .userForm {
+//      padding: 24px;
+//      display: flex;
+//      flex-direction: column;
+//      justify-content: center;
+//      align-items: center;
+//      align-content: center;
+//
+//      .marginBottom15 {
+//        margin-bottom: 15px;
+//        @media (max-width: 900px) {
+//          font-size: 15px;
+//          text-align: center;
+//
+//
+//        }
+//      }
+//
+//      .marginBottom15-userNameInput {
+//        width: 300px;
+//        @media (max-width: 900px) {
+//          width: 165px;
+//          height: 25px;
+//        }
+//      }
+//
+//      input::-webkit-input-placeholder {
+//        font-size: 20px;
+//        line-height: 3;
+//        @media (max-width: 900px) {
+//          font-size: 12px;
+//        }
+//      }
+//
+//      .application-component-userNameButton {
+//        vertical-align: middle;
+//        padding: 10px 20px;
+//        font-size: 22px;
+//        color: #ffffff;
+//        text-decoration: none;
+//        background-color: #49dc18;
+//        text-align: center;
+//        letter-spacing: .5px;
+//        height: 50px;
+//        line-height: 36px;
+//        text-transform: uppercase;
+//        border: none;
+//        border-radius: 12px;
+//        outline: 0;
+//        position: relative;
+//        cursor: pointer;
+//        display: inline-block;
+//        overflow: hidden;
+//
+//
+//        @media (max-width: 1200px) {
+//          vertical-align: middle;
+//          padding: 10px 20px;
+//          font-size: 15px;
+//          color: #ffffff;
+//          text-decoration: none;
+//          background-color: #18dc22;
+//          text-align: center;
+//          letter-spacing: .5px;
+//          height: 30px;
+//          line-height: 16px;
+//          text-transform: uppercase;
+//          border: none;
+//          border-radius: 12px;
+//          outline: 0;
+//          position: relative;
+//          cursor: pointer;
+//          display: inline-block;
+//          overflow: hidden;
+//
+//        }
+//      }
+//
+//      .app-messages-container {
+//        height: 608px;
+//        padding-bottom: 50px;
+//      }
+//      h1 {
+//        @media (max-width: 900px) {
+//          font-size: 20px;
+//          text-align: center;
+//        }
+//      }
+//
+//      form {
+//        display: flex;
+//        flex-direction: column;
+//        justify-content: center;
+//        align-items: center;
+//        align-content: center;
+//
+//        input {
+//          font-size: 22px;
+//          //width: 300px;
+//          border: 2px solid #aaa;
+//          border-radius: 4px;
+//          margin: 8px 0;
+//          outline: none;
+//          padding: 15px;
+//          box-sizing: border-box;
+//          transition: .3s;
+//        }
+//
+//        input[type=text]:focus {
+//          border-color: #049d45;
+//          box-shadow: 0 0 8px 0 #64f110;
+//        }
+//
+//      }
+//    }
+//  }
+//}
+
+.user-entering-form {
   width: 100%;
   height: 100%;
   min-width: 100%;
-  min-height: 100%;
+  //min-height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   align-content: center;
   padding-top: 0;
+  position: relative;
+}
+input {
+  background: rgba(255,255,255,0.4);
+  border: none;
+  position: relative;
+  display: block;
+  outline: none;
+  width: 450px;
+  height: 30px;
+  margin: 8px auto;
+  padding: 10px;
+  color: white;
+  -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+}
 
-  &::before {
-    content: '';
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    background-color: #12ec1c;
-    top: 0;
-    z-index: -1;
+.semi-transparent-button {
+  transition: all .5s ease;
+  color: #fff;
+  border: 3px solid white;
+  font-family:'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  font-size: 17px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 4px;
+}
+.semi-transparent-button:hover {
+  color: #001F3F;
+  background-color: #fff;
+}
+
+.marginBottom15 {
+  color: white;
+  font-size: xx-large;
+
+  @media (max-width: 500px) {
+    font-size: larger;
+
+  }
+}
+::-webkit-input-placeholder { color: white;}
+:-moz-placeholder { color: white; }
+::-moz-placeholder { color: white; }
+:-ms-input-placeholder { color: white; }
+
+@media (max-width:500px ) {
+  input{
+    width: 90%;
+    height: 25%;
   }
 
-  .application-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    //border-radius: 4px;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    font-size: 24px;
-    padding-bottom: 20px;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    border-bottom-color: #44d90b;
-    border-radius: 15px;
-    padding-top: 0;
-    height: 70%;
-    width: auto;
+  h1{
+    font-size: larger;
+  }
+  .marginBottom15{
+    font-size: larger;
+  }
 
-    @media (max-width: 1200px) {
-
-      height: auto;
-      width: auto;
-      padding-top: 0;
-      padding-bottom: 0;
-
-    }
-
-    .userForm {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-
-      .marginBottom15 {
-        margin-bottom: 15px;
-        @media (max-width: 900px) {
-          font-size: 15px;
-          text-align: center;
-
-
-        }
-      }
-
-      .marginBottom15-userNameInput {
-        width: 300px;
-        @media (max-width: 900px) {
-          width: 165px;
-          height: 25px;
-        }
-      }
-
-      input::-webkit-input-placeholder {
-        font-size: 20px;
-        line-height: 3;
-        @media (max-width: 900px) {
-          font-size: 12px;
-        }
-      }
-
-      .application-component-userNameButton {
-        vertical-align: middle;
-        padding: 10px 20px;
-        font-size: 22px;
-        color: #ffffff;
-        text-decoration: none;
-        background-color: #49dc18;
-        text-align: center;
-        letter-spacing: .5px;
-        height: 50px;
-        line-height: 36px;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 12px;
-        outline: 0;
-        position: relative;
-        cursor: pointer;
-        display: inline-block;
-        overflow: hidden;
-
-
-        @media (max-width: 1200px) {
-          vertical-align: middle;
-          padding: 10px 20px;
-          font-size: 15px;
-          color: #ffffff;
-          text-decoration: none;
-          background-color: #18dc22;
-          text-align: center;
-          letter-spacing: .5px;
-          height: 30px;
-          line-height: 16px;
-          text-transform: uppercase;
-          border: none;
-          border-radius: 12px;
-          outline: 0;
-          position: relative;
-          cursor: pointer;
-          display: inline-block;
-          overflow: hidden;
-
-        }
-      }
-
-      .app-messages-container {
-        height: 608px;
-        padding-bottom: 50px;
-      }
-      h1 {
-        @media (max-width: 900px) {
-          font-size: 20px;
-          text-align: center;
-        }
-      }
-
-      form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-
-        input {
-          font-size: 22px;
-          //width: 300px;
-          border: 2px solid #aaa;
-          border-radius: 4px;
-          margin: 8px 0;
-          outline: none;
-          padding: 15px;
-          box-sizing: border-box;
-          transition: .3s;
-        }
-
-        input[type=text]:focus {
-          border-color: #049d45;
-          box-shadow: 0 0 8px 0 #64f110;
-        }
-
-        //button {
-        //  vertical-align: middle;
-        //  padding: 10px 20px;
-        //  font-size: 22px;
-        //  color: #ffffff;
-        //  text-decoration: none;
-        //  background-color: #dc5218;
-        //  text-align: center;
-        //  letter-spacing: .5px;
-        //  height: 50px;
-        //  line-height: 36px;
-        //  text-transform: uppercase;
-        //  border: none;
-        //  border-radius: 2px;
-        //  outline: 0;
-        //  position: relative;
-        //  cursor: pointer;
-        //  display: inline-block;
-        //  overflow: hidden;
-        //}
-
-      }
-    }
+  .kchat-logo{
+    width: 25rem;
   }
 }

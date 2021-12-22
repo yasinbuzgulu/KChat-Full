@@ -1,23 +1,23 @@
-<div class="application-component">
-  <div class="application-container">
-    <ng-container *ngIf="!user">
-      <div class="userForm">
-        <h1 class="marginBottom15">
-          Welcome to the chat
-        </h1>
-        <div class="marginBottom15">
-          What is your name ?
-        </div>
-        <form (submit)="activateUser()">
-          <input #userInput [formControl]="userName" class="marginBottom15-userNameInput" type="text" placeholder="What is your name?">
-          <button *ngIf="userName.value" type="submit" class="application-component-userNameButton">
-            Let's go!
-          </button>
-        </form>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="user">
-      <app-messages class="app-messages-container" [user]="user"></app-messages>
-    </ng-container>
+<div class="user-entering-form" *ngIf="!user">
+  <ng-container *ngIf="!user">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <div>
+      <img class="kchat-logo" src="assets/kchat-removebg-preview(1).png">
+    </div>
+    <h1 class="marginBottom15" style="color: white; "  >
+      Welcome to the KChat App
+    </h1>
   </div>
+    <form (submit)="activateUser()">
+      <input #userInput [formControl]="userName" type="text" placeholder="Type your name, please ...">
+      <div style="display: flex; justify-content: center; margin-top: 2rem;">
+        <button *ngIf="userName.value" type="submit" class="semi-transparent-button">
+          Let's go!
+        </button>
+      </div>
+    </form>
+  </ng-container>
 </div>
+<ng-container *ngIf="user">
+  <app-messages class="app-messages-container" [user]="user"></app-messages>
+</ng-container>

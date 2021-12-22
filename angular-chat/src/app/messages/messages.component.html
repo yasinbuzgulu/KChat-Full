@@ -1,39 +1,67 @@
-<hr >
-<div class="message-component">
-  <div #scroll [scrollTop]="scroll.scrollHeight" class="message-container">
+<div class="user-header-message-box">
+  <div id="user_header">
+    <div id="user" class="animated fadeInDown">
 
-    <div class="messages">
-      <div *ngFor="let message of messages"
-           [ngClass]="{'current-user': isCurrentUser(message.userId), 'other-user': !isCurrentUser(message.userId)}">
-        <div class="bubble" [ngStyle]="{'background-color': (user.exitTime < message.date.getTime())? 'white' : 'aqua'}" >
-          <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
-            {{message.userName}}
-          </div>
-          <div *ngIf="isCurrentUser(message.userId)" class="user-name">
-            Me ( {{user.name}} )
-          </div>
-          <div class="message-text" >
-            <span class="margin-right-10">{{message.text}}</span>
-            <span *ngIf="isToday(message.date)" class="message-date">
-              {{message.date | date:'hh:mm'}}
+      <div id="user_picture">
+        <div id="picture_box">
+          <img style="height: 120px" src="https://picsum.photos/200">
+        </div>
+      </div>
+      <div id="user_info">
+        <h2 class="user_name"> Username :{{user.name}}
+          <i class="icon-ok-sign verified"></i>
+        </h2>
+        <hr>
+        <ul id="user_list">
+          <li>Last login time : {{loginDate | date: 'short'}}</li>
+          <li> Last logout time : {{logoutDate | date: 'short' }}</li>
+          <li> Last saved unread messages count : {{count}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="message-component">
+    <hr>
+    <div #scroll [scrollTop]="scroll.scrollHeight" style="background-image: url('assets/pattern.jpg');" class="message-container">
+      <div class="messages">
+        <div *ngFor="let message of messages"
+             [ngClass]="{'current-user': isCurrentUser(message.userId), 'other-user': !isCurrentUser(message.userId)}">
+
+          <div class="bubble"
+               [ngStyle]="{'background-color': (user.exitTime < message.date.getTime() && loginDate > message.date )? 'aqua' : 'white'}">
+            <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
+              {{message.userName}}
+            </div>
+            <div *ngIf="isCurrentUser(message.userId)" class="user-name">
+              Me ( {{user.name}} )
+            </div>
+            <div class="message-text">
+              <span class="margin-right-10">{{message.text}}</span>
+              <span *ngIf="isToday(message.date)" class="message-date">
+              {{message.date | date:'hh:mm a'}}, Today
             </span>
-          </div>
-          <div *ngIf="!isToday(message.date)" class="message-date" >
-            {{message.date | date:'hh:mm dd MMM yyyy'}}
+            </div>
+            <div *ngIf="!isToday(message.date)" class="message-date">
+              {{message.date | date:'short'}}
+            </div>
           </div>
         </div>
       </div>
-      <div [hidden]="switch === false"> {{count}} New Messages ___* </div>
-
     </div>
+    <hr>
+    <form (submit)="send()" class="message-form">
+      <input #messageInput class="input-message" [formControl]="name" placeholder="Write your message..." type="text">
+      <div class="send-button">
+        <button [hidden]="name.value === ''" [disabled]="name.value === ''" type="submit"
+                class="message-component-button">
+          <b style="margin-left: 3px">Send</b> <img
+          style="  margin: -2px; margin-top: -2px; margin-left: 8px; margin-right: -22px;"
+          class="send-message-button-image" src="assets/paper-plane.png" alt="">
+        </button>
+      </div>
+    </form>
   </div>
-  <hr>
-  <form (submit)="send()" class="message-form">
-    <input #messageInput   [formControl]="name" placeholder="Write your message..." type="text">
-    <div class="send-button">
-      <button [hidden]="name.value === ''" [disabled]="name.value === ''" type="submit" class="message-component-button">
-        Send <img class="send-message-button-image" src="assets/paper-plane.png" alt="">
-      </button>
-    </div>
-  </form>
+
 </div>

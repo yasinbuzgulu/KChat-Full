@@ -1,15 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
 html, body {
   height: 100%;
   margin: 0;
+  background-position: top;
+
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #D9DBD6;
+  background-image: url('https://image.freepik.com/free-photo/woman-using-her-mobile-phone-city-skyline-night-light-background_1391-82.jpg');
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover;
+  background-size: cover;
+
 }
 
+*{
+  font-family: 'Poppins', sans-serif;
+}

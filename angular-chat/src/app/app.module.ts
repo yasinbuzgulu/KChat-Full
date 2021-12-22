@@ -7,22 +7,23 @@ import {MessagesComponent} from './messages/messages.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
-import { ChatBoxComponent } from './chat-box/chat-box.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessagesComponent,
-    ChatBoxComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        RouterModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    RouterModule,
+    MatDialogModule,
+
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
