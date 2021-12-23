@@ -1,15 +1,18 @@
-<div class="user-entering-form" *ngIf="!user">
+<div class="user-entering-form fade-in-bg" *ngIf="!user"
+     style="background-image: url('assets/chat-background.jpg'); background-size: cover;">
   <ng-container *ngIf="!user">
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <div>
-      <img class="kchat-logo" src="assets/kchat-removebg-preview(1).png">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div class="">
+        <img class="kchat-logo slide-in-blurred-top-img" src="assets/kchat-removebg-preview(1).png">
+      </div>
+      <h1 class="marginBottom15 slide-in-blurred-right-input" style="color: white; ">
+        Welcome to the KChat App
+      </h1>
     </div>
-    <h1 class="marginBottom15" style="color: white; "  >
-      Welcome to the KChat App
-    </h1>
-  </div>
     <form (submit)="activateUser()">
-      <input #userInput [formControl]="userName" type="text" placeholder="Type your name, please ...">
+      <div class="slide-in-blurred-left-title ">
+        <input class="" #userInput [formControl]="userName" type="text" placeholder="Type your name, please ...">
+      </div>
       <div style="display: flex; justify-content: center; margin-top: 2rem;">
         <button *ngIf="userName.value" type="submit" class="semi-transparent-button">
           Let's go!
@@ -18,6 +21,9 @@
     </form>
   </ng-container>
 </div>
-<ng-container *ngIf="user">
-  <app-messages class="app-messages-container" [user]="user"></app-messages>
-</ng-container>
+<div *ngIf="user" style="height: 100%">
+  <ng-container *ngIf="user">
+    <app-messages [user]="user" style="height:100%"></app-messages>
+  </ng-container>
+</div>
+

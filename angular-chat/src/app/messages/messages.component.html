@@ -1,18 +1,18 @@
-<div class="user-header-message-box">
-  <div id="user_header">
-    <div id="user" class="animated fadeInDown">
+<div class="user-header-message-box" style="background-image: url('assets/2.jpg'); height: 100%">
 
-      <div id="user_picture">
-        <div id="picture_box">
+  <div class="user_header">
+    <div class="user animated">
+      <div class="user_picture">
+        <div class="picture_box">
           <img style="height: 120px" src="https://picsum.photos/200">
         </div>
       </div>
-      <div id="user_info">
-        <h2 class="user_name"> Username :{{user.name}}
+      <div class="user_info">
+        <h2 class="user_name"> Username : {{user.name}}
           <i class="icon-ok-sign verified"></i>
         </h2>
         <hr>
-        <ul id="user_list">
+        <ul class="user_list">
           <li>Last login time : {{loginDate | date: 'short'}}</li>
           <li> Last logout time : {{logoutDate | date: 'short' }}</li>
           <li> Last saved unread messages count : {{count}}</li>
@@ -21,10 +21,10 @@
     </div>
   </div>
 
-
   <div class="message-component">
     <hr>
-    <div #scroll [scrollTop]="scroll.scrollHeight" style="background-image: url('assets/pattern.jpg');" class="message-container">
+    <div #scroll [scrollTop]="scroll.scrollHeight" style="background-image: url('assets/pattern.png');"
+         class="message-container">
       <div class="messages">
         <div *ngFor="let message of messages"
              [ngClass]="{'current-user': isCurrentUser(message.userId), 'other-user': !isCurrentUser(message.userId)}">
@@ -47,6 +47,7 @@
               {{message.date | date:'short'}}
             </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 
 .user-header-message-box{
   padding-top: 80px;
-  background-color: black;
+  height: 91.6%;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover; background-size: cover;
 }
 
 .message-component {
@@ -183,22 +185,22 @@
   -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
   box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
   box-sizing: border-box;
-
+  border-radius: 12px;
 }
 
 .message-component-button {
   transition: all .5s ease;
-  color: #fff;
-  border: 3px solid white;
-  font-family:'Montserrat', sans-serif;
+  /* color: #fff; */
+  border: 3px solid #fff;
+  font-family: Montserrat,sans-serif;
   text-transform: uppercase;
   text-align: center;
   line-height: 1;
-  font-size: 17px;
-  background-color : transparent;
-  padding: 10px;
-  outline: none;
-  border-radius: 4px;
+  /* font-size: 17px; */
+  /* background-color: initial; */
+  padding: 13px;
+  /* outline: none; */
+  border-radius: 12px;
 }
 
 .message-component-button:hover {
@@ -216,7 +218,7 @@
 hr {
   border: solid;
   border-width: 1px;
-  border-color: #0B86C3;
+  border-color: #fcfcfc;
 }
 
 .info_icon {
@@ -225,7 +227,7 @@ hr {
   padding: 3px;
 }
 
-#user_header {
+.user_header {
   width: 70%;
   height: 117px;
   margin: auto;
@@ -243,18 +245,18 @@ hr {
   }
 }
 
-#user {
+.user {
   width: 700px;
   height: 100px;
   float: left;
 }
 
-#user_picture {
+.user_picture {
   float: left;
   padding-right: 20px;
 }
 
-#user_info {
+.user_info {
   width: inherit;
   height: inherit;
   background-color: #3c3c3c66;
@@ -273,25 +275,24 @@ hr {
   color: #0B86C3;
 }
 
-#user_info ul {
+.user_info ul {
   padding: 0;
   list-style-type: none;
   margin: 0;
 }
 
-#user_list {
+.user_list {
   font-family: 'Open Sans', sans-serif;
   font-weight: 200;
   font-size: 14px;
   color: #fff;
 }
 
-#user_list li {
+.user_list li {
   display: inline;
   margin-right: 20px;
   letter-spacing: 1px;
 }
 
-//@media (max-width: ) {
-//
-//}
+////////////////////
+

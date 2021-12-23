@@ -85,13 +85,28 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
 
   private _unreadMessagesCount() {
     this.count = this.messages.filter(time => ( this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
+    let timerInterval
     Swal.fire({
       title: 'You have '+ this.count + ' new messages.',
-      width: 600,
-      padding: '3em',
-      color: '#0B86C3',
+      timer: 2000,
+      timerProgressBar: true,
       backdrop: `rgba(1, 1, 1, 0.8)`,
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+
+      }
     })
+    // Swal.fire({
+    //   title: 'You have '+ this.count + ' new messages.',
+    //   width: 600,
+    //   padding: '3em',
+    //   color: '#0B86C3',
+    //   backdrop: `rgba(1, 1, 1, 0.8)`,
+    // })
   }
 
   connect() {
