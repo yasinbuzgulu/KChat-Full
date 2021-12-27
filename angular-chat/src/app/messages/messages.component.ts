@@ -121,8 +121,6 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   findOutUserStatus(userName: string) {
-    debugger;
-
     this.userService.getUser(userName)
       .then(user => this.tempUser = user);
     console.log(this.tempUser);
@@ -153,6 +151,9 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
       backdrop: `rgba(1, 1, 1, 0.8)`,
       color: "#2d6ad9",
       confirmButtonColor: "#2d6ad9",
+      customClass: ({
+        validationMessage : "swal2-kaan",title:"swal2-kaan"
+      }),
     });
   }
 
