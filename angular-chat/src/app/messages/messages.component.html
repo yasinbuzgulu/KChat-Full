@@ -1,11 +1,9 @@
-<div class="user-header-message-box" style="background-image: url('assets/2.jpg'); height: 100%">
+<div class="user-header-message-box" style="background-image: url('assets/4.png'); height: 100%">
 
   <div class="user_header">
     <div class="user animated">
       <div class="user_picture">
-        <div class="picture_box">
-          <img style="height: 120px" src="https://picsum.photos/200">
-        </div>
+          <img class="user-header-profile-image" src="https://picsum.photos/200">
       </div>
       <div class="user_info">
         <h2 class="user_name"> Username : {{user.name}}
@@ -29,14 +27,25 @@
         <div *ngFor="let message of messages"
              [ngClass]="{'current-user': isCurrentUser(message.userId), 'other-user': !isCurrentUser(message.userId)}">
 
-          <div class="bubble"
-               [ngStyle]="{'background-color': (user.exitTime < message.date.getTime() && loginDate > message.date )? 'aqua' : 'white'}">
-            <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
-              {{message.userName}}
+          <div class="bubble">
+           <div *ngIf="(user.exitTime < message.date.getTime() && loginDate > message.date )" style="display: flex; flex-direction: row;">
+             <img src="assets/new-message-icon.png" style="height: 20px" alt=""> <b class="new-message-text" > New Message !</b>
+           </div>
+            <div style="display: flex; flex-direction: row">
+              <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
+                {{message.userName}}
+              </div>
+              <div *ngIf="isCurrentUser(message.userId)" class="user-name">
+                Me ( {{user.name}} )
+              </div>
+              <div >
+                <img  src="https://img.icons8.com/emoji/50/000000/green-circle-emoji.png" class="user-status"/>
+                <img  src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" class="user-status"/>
+
+              </div>
+
             </div>
-            <div *ngIf="isCurrentUser(message.userId)" class="user-name">
-              Me ( {{user.name}} )
-            </div>
+
             <div class="message-text">
               <span class="margin-right-10">{{message.text}}</span>
               <span *ngIf="isToday(message.date)" class="message-date">

@@ -13,7 +13,8 @@ import java.util.List;
  * Mesajlara ait işlemlerin yönetimini yapan sınıf
  */
 @CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000", "http://localhost:8080",
-        "http://10.33.23.88:4200", "http://10.33.23.88:8080", "http://10.33.23.88:3000"}, maxAge = 3600)
+        "http://10.33.23.88:4200", "http://10.33.23.88:8080", "http://10.33.23.88:3000",
+        "http://192.168.1.105:3000", "http://192.168.1.105:4200", "http://192.168.1.105:8080"}, maxAge = 3600)
 @RestController
 @RequestMapping("/messages")
 public class MessageController {

@@ -1,19 +1,22 @@
 
-.user-header-message-box{
-  padding-top: 80px;
+.user-header-message-box {
+  //padding-top: 80px;
   height: 91.6%;
   -webkit-background-size: cover !important;
-  -moz-background-size: cover; background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+  padding: 2%;
 }
 
 .message-component {
-  height: 600px;
+  height: 63%;
   border-radius: 12px;
   width: 80%;
   margin: auto;
 
   @media (max-width: 900px) {
-    height: 400px;
+    height: 60%;
     width: 80%;
 
   }
@@ -45,10 +48,9 @@
         box-shadow: -1px 1px 0px #ccd6d8;
         padding: 10px;
         border: solid 1px #9f9f9f;
-        border-radius: 10px;
-
+        border-radius: 10px 1px 10px  1px;
+        background-color: white;
         @media (max-width: 900px) {
-
           padding: 2px;
         }
       }
@@ -167,12 +169,8 @@
   background: #7d7d7d;
 }
 
-.swal-overlay--show-modal, .swal-modal {
-  animation: bounce;
-}
-
 .input-message {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.4);
   border: none;
   position: relative;
   display: block;
@@ -182,25 +180,28 @@
   margin: 8px 12px;
   padding: 10px;
   color: white;
-  -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
-  box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   border-radius: 12px;
+  margin-bottom: 25px;
 }
 
 .message-component-button {
   transition: all .5s ease;
-  /* color: #fff; */
   border: 3px solid #fff;
-  font-family: Montserrat,sans-serif;
+  font-family: Montserrat, sans-serif;
   text-transform: uppercase;
   text-align: center;
   line-height: 1;
-  /* font-size: 17px; */
-  /* background-color: initial; */
+  margin-bottom: 15px;
   padding: 13px;
-  /* outline: none; */
   border-radius: 12px;
+
+  @media (max-width: 900px) {
+    padding-bottom: 1rem;
+    margin-bottom: 15px;
+  }
 }
 
 .message-component-button:hover {
@@ -208,17 +209,31 @@
   background-color: #fff;
 }
 
-::-webkit-input-placeholder { color: white;}
-:-moz-placeholder { color: white; }
-::-moz-placeholder { color: white; }
-:-ms-input-placeholder { color: white; }
+::-webkit-input-placeholder {
+  color: white;
+}
 
+:-moz-placeholder {
+  color: white;
+}
 
-//////////////TEST/////////////////////////////////////////////////////////
+::-moz-placeholder {
+  color: white;
+}
+
+:-ms-input-placeholder {
+  color: white;
+}
+
 hr {
   border: solid;
   border-width: 1px;
   border-color: #fcfcfc;
+
+  @media (max-width: 900px) {
+    width: initial;
+    margin-right: 16px;
+  }
 }
 
 .info_icon {
@@ -231,16 +246,18 @@ hr {
   width: 70%;
   height: 117px;
   margin: auto;
-  margin-left: 7rem;
   padding: 10px;
-  background: #222 url('https://subtlepatterns.com/patterns/use_your_illusion.png') repeat;
+  background: url('https://subtlepatterns.com/patterns/use_your_illusion.png') center center fixed no-repeat;
 
-  @media (max-width: 700px) {
-    margin-left: 3rem;
+  @media only screen and (max-width: 900px) and (min-width: 450px){
+    margin-left: 5rem;
+    padding-top: 8%;
+
   }
 
-  @media (min-width: 1150px) {
-    margin-left: 13rem;
+  @media (max-width: 450px) {
+    width: 32%;
+    margin: auto auto auto 20px;
 
   }
 }
@@ -254,13 +271,38 @@ hr {
 .user_picture {
   float: left;
   padding-right: 20px;
+
+  @media (max-width: 400px) {
+    padding-right: 10px;
+  }
 }
 
+.user-header-profile-image {
+  height: 120px;
+  @media only screen and (max-width: 800px) and (min-width: 450px) {
+    height: 110px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    height: 60px;
+  }
+}
+
+
 .user_info {
-  width: inherit;
+  width: 100%;
   height: inherit;
   background-color: #3c3c3c66;
   padding: 10px;
+
+  @media only screen and (max-width: 800px) and (min-width: 400px) {
+    width: 50%;
+    padding: 6px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 31%;
+  }
 }
 
 .user_name {
@@ -269,6 +311,10 @@ hr {
   margin: 0;
   color: #fff;
   letter-spacing: 1.75px;
+
+  @media (max-width: 900px) {
+    font-size: small;
+  }
 }
 
 .verified {
@@ -286,6 +332,18 @@ hr {
   font-weight: 200;
   font-size: 14px;
   color: #fff;
+  display: flex;
+
+  @media only screen and (max-width: 900px) and (min-width: 450px) {
+    font-size: xx-small;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media only screen and (max-width: 450px) {
+    font-size: xx-small;
+    display: inline-block;
+  }
 }
 
 .user_list li {
@@ -294,5 +352,21 @@ hr {
   letter-spacing: 1px;
 }
 
-////////////////////
+.user-status{
+  height: 10px;
+  padding-bottom: 4px;
+  padding-left: 5px;
 
+  @media (max-width: 500px) {
+    padding-bottom: 7px;
+  }
+}
+
+.new-message-text{
+  color: #0B86C3;
+
+  @media (max-width: 900px) {
+    font-size: small;
+  }
+}
+////////////////////

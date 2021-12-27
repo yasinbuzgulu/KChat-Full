@@ -44,7 +44,8 @@ public class UserManager {
         User existingUser = userRepository.findByName(userName);
         if (existingUser != null) {
             existingUser.setLoginTime(Date.from(Instant.now()).getTime());
-            return userRepository.saveObject(existingUser);
+            userRepository.saveObject(existingUser);
+            return existingUser;
         } else {
             return userRepository.save(userName);
         }

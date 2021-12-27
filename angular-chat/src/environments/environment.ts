@@ -4,9 +4,11 @@
 
 export const environment = {
   production: true,
-  server: 'http://localhost:8000',
-  webSocket: 'ws://localhost:8000/socket'
+  server: 'http://10.33.23.88:8000',
+  webSocket: 'ws://10.33.23.88:8000/socket'
 };
+// 'http://192.168.1.105:8000', - > ev için wifi ipv4
+// 'ws://192.168.1.105:8000/socket' -> ev için websocket ip url i
 
 /*
  * For easier debugging in development mode, you can import the following file

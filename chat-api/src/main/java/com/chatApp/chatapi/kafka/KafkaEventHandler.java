@@ -30,7 +30,7 @@ public class KafkaEventHandler {
     @KafkaListener(topics = "chat")
     public void listen(MessageAvro messageAvro) {
         Message message = new Message(messageAvro.getId(), messageAvro.getUserName(),
-                messageAvro.getUserId(), messageAvro.getText(), new Date(Long.valueOf(messageAvro.getDate())));
+                messageAvro.getUserId(), messageAvro.getText(), new Date(messageAvro.getDate()));
         template.convertAndSend("/chat", message);
     }
 

@@ -44,24 +44,18 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   scrollTop = 200;
   loginDate: Date;
   logoutDate: Date;
-  count ;
+  count;
   switch = true;
-  isOnline = false;
+  userStatus = false;
+  tempUser: User;
 
   ngOnInit(): void {
     this.switch = true;
-    this.detectUserStatus();
     this.connect();
     this._getMessages();
     this._setScrollToBottom();
-    window.addEventListener('beforeunload', function(e) {
-      const confirmationMessage = '\o/';
-      e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
-      return confirmationMessage;              // Gecko, WebKit, Chrome <34
-    });
-    this.loginDate = new Date(this.user.loginTime);
-    this.logoutDate = new Date(this.user.exitTime);
-
+    this._loadListener();
+    this.setLogDate();
   }
 
   ngAfterViewInit(): void {
@@ -72,41 +66,17 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     this.disconnect();
   }
 
-  detectUserStatus() {
-    this.isOnline = this.user.loginTime > this.user.exitTime;
+  onActivate(event) {
+    window.scroll(0, 0);
   }
 
-  private _getMessages() {
-    this.messageService.getMessages().then((messages: Message[]) => {
-      this.messages = messages;
-      this._unreadMessagesCount();
-    });
+  ngAfterViewChecked(): void {
+    this._setScrollToBottom();
   }
 
-  private _unreadMessagesCount() {
-    this.count = this.messages.filter(time => ( this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
-    let timerInterval
-    Swal.fire({
-      title: 'You have '+ this.count + ' new messages.',
-      timer: 2000,
-      timerProgressBar: true,
-      backdrop: `rgba(1, 1, 1, 0.8)`,
-      willClose: () => {
-        clearInterval(timerInterval)
-      }
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-
-      }
-    })
-    // Swal.fire({
-    //   title: 'You have '+ this.count + ' new messages.',
-    //   width: 600,
-    //   padding: '3em',
-    //   color: '#0B86C3',
-    //   backdrop: `rgba(1, 1, 1, 0.8)`,
-    // })
+  setLogDate() {
+    this.loginDate = new Date(this.user.loginTime);
+    this.logoutDate = new Date(this.user.exitTime);
   }
 
   connect() {
@@ -116,7 +86,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
       this.websocket.subscribe('/chat', (frame: { body: string }) => {
         const message: Message = JSON.parse(frame.body);
         this.messages.push({...message, date: new Date(message.date)});
-      } );
+      });
     }, (error) => {
       alert('STOMP error ' + error);
     });
@@ -129,12 +99,6 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     console.warn('Disconnected');
   }
 
-  private _setScrollToBottom() {
-    try {
-      this.scrollMessage.nativeElement.scrollTop = this.scrollMessage.nativeElement.scrollHeight;
-    } catch (err) {
-    }
-  }
 
   send() {
     this.count = 0;
@@ -155,16 +119,46 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   isCurrentUser(userId: string) {
-    this.isOnline = true;
     return userId === this.user.id;
   }
 
-  onActivate(event) {
-    window.scroll(0, 0);
+  findOutUserStatus(userName: string) {
+    this.userService.getUser(userName)
+      .then(user => this.tempUser = user);
+    return this.tempUser.loginTime > this.tempUser.exitTime;
   }
 
-  ngAfterViewChecked(): void {
-    this._setScrollToBottom();
+  private _loadListener() {
+    window.addEventListener('beforeunload', function (e) {
+      const confirmationMessage = '\o/';
+      e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+      return confirmationMessage;              // Gecko, WebKit, Chrome <34
+    });
+  }
+
+  private _getMessages() {
+    this.messageService.getMessages().then((messages: Message[]) => {
+      this.messages = messages;
+      this._unreadMessagesCount();
+    });
+  }
+
+  private _unreadMessagesCount() {
+    this.count = this.messages.filter(time => (this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
+    let timerInterval
+    Swal.fire({
+      title: 'You have ' + this.count + ' new messages.',
+      timer: 2000,
+      timerProgressBar: true,
+      backdrop: `rgba(1, 1, 1, 0.8)`,
+    });
+  }
+
+  private _setScrollToBottom() {
+    try {
+      this.scrollMessage.nativeElement.scrollTop = this.scrollMessage.nativeElement.scrollHeight;
+    } catch (err) {
+    }
   }
 
 }
