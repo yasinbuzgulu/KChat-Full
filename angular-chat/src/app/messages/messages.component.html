@@ -31,7 +31,7 @@
            <div *ngIf="(user.exitTime < message.date.getTime() && loginDate > message.date )" style="display: flex; flex-direction: row;">
              <img src="assets/new-message-icon.png" style="height: 20px" alt=""> <b class="new-message-text" > New Message !</b>
            </div>
-            <div style="display: flex; flex-direction: row">
+            <div class="user-knowledge-div">
               <div *ngIf="!isCurrentUser(message.userId)" class="user-name">
                 {{message.userName}}
               </div>
@@ -41,7 +41,6 @@
               <div >
                 <img  src="https://img.icons8.com/emoji/50/000000/green-circle-emoji.png" class="user-status"/>
                 <img  src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" class="user-status"/>
-
               </div>
 
             </div>

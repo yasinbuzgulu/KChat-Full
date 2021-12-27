@@ -99,9 +99,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     console.warn('Disconnected');
   }
 
-
   send() {
-    this.count = 0;
     this.switch = false;
     this._setScrollToBottom();
     this.messageService.send({
@@ -123,9 +121,12 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   }
 
   findOutUserStatus(userName: string) {
+    debugger;
+
     this.userService.getUser(userName)
       .then(user => this.tempUser = user);
-    return this.tempUser.loginTime > this.tempUser.exitTime;
+    console.log(this.tempUser);
+    return this.tempUser?.loginTime > this.tempUser?.exitTime;
   }
 
   private _loadListener() {
@@ -145,12 +146,13 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
 
   private _unreadMessagesCount() {
     this.count = this.messages.filter(time => (this.user.exitTime < time.date.getTime())).filter(tim => tim.date < this.loginDate).length;
-    let timerInterval
     Swal.fire({
       title: 'You have ' + this.count + ' new messages.',
       timer: 2000,
       timerProgressBar: true,
       backdrop: `rgba(1, 1, 1, 0.8)`,
+      color: "#2d6ad9",
+      confirmButtonColor: "#2d6ad9",
     });
   }
 

@@ -5,7 +5,7 @@
   -webkit-background-size: cover !important;
   -moz-background-size: cover;
   background-size: cover;
-  overflow: hidden;
+  //overflow: hidden;
   padding: 2%;
 }
 
@@ -26,6 +26,7 @@
     padding: 15px;
     height: calc(100% - 80px);
     overflow-y: scroll;
+    overflow-x: hidden;
     border-radius: 12px;
     //background-color: white;
 
@@ -48,13 +49,42 @@
         box-shadow: -1px 1px 0px #ccd6d8;
         padding: 10px;
         border: solid 1px #9f9f9f;
-        border-radius: 10px 1px 10px  1px;
+        //border-radius: 10px 1px 10px  1px;
         background-color: white;
+        display: inline-block;
+        vertical-align: top;
+        line-height: 1.4;
+        width: 60%;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
         @media (max-width: 900px) {
           padding: 2px;
         }
       }
 
+      .other-user{
+        .bubble{
+          border-radius: 15px 50px 30px 5px;
+        }
+
+        .user-knowledge-div{
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+        }
+      }
+
+      .current-user{
+        .bubble{
+          border-radius: 50px 15px 5px 30px;
+        }
+
+        .user-knowledge-div{
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+        }
+      }
       .current-user, .other-user {
         margin-bottom: 20px;
       }
@@ -369,4 +399,20 @@ hr {
     font-size: small;
   }
 }
-////////////////////
+
+.swal2-title {
+  position: relative;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.8em 1em 0;
+  color: inherit;
+  font-size: small;
+  font-weight: 600;
+  text-align: center;
+  text-transform: none;
+  word-wrap: break-word;
+
+  @media (max-width: 800px){
+    font-size: small;
+  }
+}
