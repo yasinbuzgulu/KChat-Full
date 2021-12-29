@@ -15,7 +15,6 @@ import {Message} from '../model/message.interface';
 import {User} from '../model/user.interface';
 import {environment} from '../../environments/environment';
 import {UserService} from '../service/user.service';
-import {MatDialog} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,18 +24,14 @@ import Swal from 'sweetalert2';
 })
 export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
 
-  constructor(private messageService: MessageService,
-              private userService: UserService,
-              private dialog: MatDialog) {
+  constructor(private messageService: MessageService) {
   }
 
-  @Input()
-  user: User;
+  @Input() user: User;
 
   @ViewChild('scroll') private scrollMessage: ElementRef;
 
-  @ViewChild('messageInput')
-  messageInput: ElementRef;
+  @ViewChild('messageInput') messageInput: ElementRef;
 
   messages: Message[] = [];
   name = new FormControl('');
@@ -44,18 +39,23 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   scrollTop = 200;
   loginDate: Date;
   logoutDate: Date;
-  count;
+  count : number;
   switch = true;
   userStatus = false;
-  tempUser: User;
+  onlineUserNames: User[];
+  tempUser : User;
+
+  public textArea: string = '';
+  public isEmojiPickerVisible: boolean;
 
   ngOnInit(): void {
     this.switch = true;
     this.connect();
     this._getMessages();
     this._setScrollToBottom();
-    this._loadListener();
+    MessagesComponent._loadListener();
     this.setLogDate();
+    console.log(this.messages);
   }
 
   ngAfterViewInit(): void {
@@ -66,12 +66,17 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     this.disconnect();
   }
 
-  onActivate(event) {
+  onActivate() {
     window.scroll(0, 0);
   }
 
   ngAfterViewChecked(): void {
     this._setScrollToBottom();
+  }
+
+  public addEmoji(event) {
+    this.textArea = `${this.textArea}${event.emoji.native}`;
+    // this.isEmojiPickerVisible = false;
   }
 
   setLogDate() {
@@ -120,14 +125,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
     return userId === this.user.id;
   }
 
-  findOutUserStatus(userName: string) {
-    this.userService.getUser(userName)
-      .then(user => this.tempUser = user);
-    console.log(this.tempUser);
-    return this.tempUser?.loginTime > this.tempUser?.exitTime;
-  }
-
-  private _loadListener() {
+  private static _loadListener() {
     window.addEventListener('beforeunload', function (e) {
       const confirmationMessage = '\o/';
       e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
@@ -152,7 +150,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
       color: "#2d6ad9",
       confirmButtonColor: "#2d6ad9",
       customClass: ({
-        validationMessage : "swal2-kaan",title:"swal2-kaan"
+        validationMessage: "swal2-kaan",
       }),
     });
   }
@@ -160,7 +158,7 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
   private _setScrollToBottom() {
     try {
       this.scrollMessage.nativeElement.scrollTop = this.scrollMessage.nativeElement.scrollHeight;
-    } catch (err) {
+    } catch (e) {
     }
   }
 

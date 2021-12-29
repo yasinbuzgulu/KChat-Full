@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
+import {PickerModule} from "@ctrl/ngx-emoji-mart";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule,
     RouterModule,
     MatDialogModule,
+    PickerModule
 
   ],
   providers: [],

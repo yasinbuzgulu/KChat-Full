@@ -2,11 +2,11 @@
 .user-header-message-box {
   //padding-top: 80px;
   height: 91.6%;
-  -webkit-background-size: cover !important;
-  -moz-background-size: cover;
-  background-size: cover;
+  -webkit-background-size: 100% !important;
+  -moz-background-size: 100%;
   //overflow: hidden;
   padding: 2%;
+  background-size: 100% 100%;
 }
 
 .message-component {
@@ -396,28 +396,7 @@ hr {
   color: #0B86C3;
 
   @media (max-width: 900px) {
-    font-size: small;
+    font-size: x-small;
   }
 }
-
-.swal2-title {
-  position: relative;
-  max-width: 100%;
-  margin: 0;
-  padding: 0.8em 1em 0;
-  color: inherit;
-  font-size: small;
-  font-weight: 600;
-  text-align: center;
-  text-transform: none;
-  word-wrap: break-word;
-
-  @media (max-width: 800px){
-    font-size: small;
-  }
-}
-
-.swal2-kaan{
-  font-size: 10px;
-  color: red;
-}
+///////////////////////////////////////

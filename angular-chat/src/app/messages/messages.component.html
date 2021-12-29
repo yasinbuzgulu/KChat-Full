@@ -1,9 +1,10 @@
-<div class="user-header-message-box" style="background-image: url('assets/4.png'); height: 100%">
+<div class="user-header-message-box" style="background: url('assets/4.png') center center fixed no-repeat;
+    background-size: 100% 100%; height: 100%">
 
   <div class="user_header">
     <div class="user animated">
       <div class="user_picture">
-          <img class="user-header-profile-image" src="https://picsum.photos/200">
+          <img class="user-header-profile-image" src="https://picsum.photos/200" alt="User profile picture(randomly)">
       </div>
       <div class="user_info">
         <h2 class="user_name"> Username : {{user.name}}
@@ -39,8 +40,8 @@
                 Me ( {{user.name}} )
               </div>
               <div >
-                <img  src="https://img.icons8.com/emoji/50/000000/green-circle-emoji.png" class="user-status"/>
-                <img  src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" class="user-status"/>
+                <img src="https://img.icons8.com/emoji/50/000000/green-circle-emoji.png" class="user-status" alt="Active user sign (green circle)"></img>
+                <img src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" class="user-status" alt="Inactive user sign (red circle)"></img>
               </div>
 
             </div>
@@ -61,15 +62,21 @@
     </div>
     <hr>
     <form (submit)="send()" class="message-form">
-      <input #messageInput class="input-message" [formControl]="name" placeholder="Write your message..." type="text">
+      <textarea #messageInput class="input-message" [(ngModel)]="textArea" [formControl]="name" placeholder="Write your message..." type="text">
+      </textarea>
+      <i (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</i>
+
+      <br>
+      <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
       <div class="send-button">
         <button [hidden]="name.value === ''" [disabled]="name.value === ''" type="submit"
                 class="message-component-button">
           <b style="margin-left: 3px">Send</b> <img
-          style="  margin: -2px; margin-top: -2px; margin-left: 8px; margin-right: -22px;"
+          style="  margin: -2px -22px -2px 8px;"
           class="send-message-button-image" src="assets/paper-plane.png" alt="">
         </button>
       </div>
+
     </form>
   </div>
 
