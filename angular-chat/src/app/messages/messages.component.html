@@ -40,8 +40,8 @@
                 Me ( {{user.name}} )
               </div>
               <div >
-                <img src="https://img.icons8.com/emoji/50/000000/green-circle-emoji.png" class="user-status" alt="Active user sign (green circle)"></img>
-                <img src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" class="user-status" alt="Inactive user sign (red circle)"></img>
+                <img src="https://img.icons8.com/emoji/50/000000/green-circle-emoji.png" class="user-status" alt="Active user sign (green circle)">
+                <img src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" class="user-status" alt="Inactive user sign (red circle)">
               </div>
 
             </div>
@@ -62,12 +62,10 @@
     </div>
     <hr>
     <form (submit)="send()" class="message-form">
-      <textarea #messageInput class="input-message" [(ngModel)]="textArea" [formControl]="name" placeholder="Write your message..." type="text">
-      </textarea>
-      <i (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</i>
-
-      <br>
-      <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>
+      <input #messageInput class="input-message" [(ngModel)]="textArea" [formControl]="name" placeholder="Write your message..." type="text">
+<!--      <i (click)="isEmojiPickerVisible = !isEmojiPickerVisible;">😀</i>-->
+<!--      <br>-->
+<!--      <emoji-mart class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)" title="Choose your emoji"></emoji-mart>-->
       <div class="send-button">
         <button [hidden]="name.value === ''" [disabled]="name.value === ''" type="submit"
                 class="message-component-button">

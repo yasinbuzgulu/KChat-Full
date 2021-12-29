@@ -14,7 +14,6 @@ import {MessageService} from '../service/message.service';
 import {Message} from '../model/message.interface';
 import {User} from '../model/user.interface';
 import {environment} from '../../environments/environment';
-import {UserService} from '../service/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -149,9 +148,6 @@ export class MessagesComponent implements OnInit, OnDestroy, AfterViewInit, Afte
       backdrop: `rgba(1, 1, 1, 0.8)`,
       color: "#2d6ad9",
       confirmButtonColor: "#2d6ad9",
-      customClass: ({
-        validationMessage: "swal2-kaan",
-      }),
     });
   }
 
